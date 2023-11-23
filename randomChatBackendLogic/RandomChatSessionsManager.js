@@ -16,6 +16,8 @@ class RandomChatSessionsManager {
      */
     pendingSessions = [];
 
+    uniqueIPs = [];
+
     sessionsEvents = new RandomChatEventsManager();
 
     /**@type {import("../typings").SessionsStats} */
@@ -30,7 +32,7 @@ class RandomChatSessionsManager {
     constructor(managedWebsocketServer) {
 
         //each hour clear chattersPerHour counter
-        this.chattersPerHourClearInterval = setInterval(() => { this.sessionStats.chattersPerHour = 0 }, (60000 * 60))
+        this.chattersPerHourClearInterval = setInterval(() => { this.sessionStats.chattersPerHour = 0; this.uniqueIPs = [] }, ((60000 * 60) * 24))
 
         //on any session event log event
         this.sessionsEvents.onAny(function () {
@@ -74,15 +76,22 @@ class RandomChatSessionsManager {
      * @returns {string} sessionUID */
     createSession(incomingConnection, req) {
 
-        console.log(req.socket.remoteAddress);
+        const incomingConnectionIP = req.socket.remoteAddress;
+
+        console.log(`websocket connection from ${incomingConnectionIP}`);
 
 
-        //mark that someone connect to this chat
-        this.sessionStats.curentChatters++;
-        this.sessionStats.chattersPerHour++;
+        //we assume that unique ip equals one unique chatter
+        if (!this.uniqueIPs.includes(incomingConnectionIP)) {
+
+            //if don't exist new unique chatter connected
+            this.sessionStats.chattersPerHour++;
+            this.uniqueIPs.push(incomingConnectionIP);
+
+        }
 
         //notify chatter that random is searched
-        incomingConnection.send(JSON.stringify({ type: "searchStart", message: `Looking for random chatter... chatters count in last hour: ${this.sessionStats.chattersPerHour}` }))
+        incomingConnection.send(JSON.stringify({ type: "searchStart", message: `Looking for random chatter... chatters count in las 24 hours: ${this.sessionStats.chattersPerHour}` }))
 
         //check if there are pending sessions
         if (this.pendingSessions.length > 0) {

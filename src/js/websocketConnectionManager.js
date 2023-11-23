@@ -4,7 +4,6 @@ import validator from "validator";
 
 //handle message input
 let authorizedDisconnect = false;
-let curentSessionUID;
 const form = document.querySelector("form");
 const messageInput = document.querySelector("input[name='m']");
 let searchAnimationInterval;
@@ -28,8 +27,6 @@ const submitHandler = (evt) => {
     if (validator.isAlphanumeric(messageInput.value, "pl-PL", { ignore: " -" }) || validator.isAlphanumeric(messageInput.value, "de-DE", { ignore: " -" }) || validator.isAlphanumeric(messageInput.value, "ru-RU", { ignore: " -" })) { }
     else { addInfo("Your message contains illegal characters (use only letters and numbers)"); return }
 
-    console.log(messageInput.value);
-
     const jsonMessage = {
         type: "frontendMessage",
         message: messageInput.value
@@ -49,17 +46,13 @@ form.addEventListener("submit", submitHandler);
 
 const wsOpenHandler = (evt) => {
 
-    console.log(`connected to wss://${window.location.hostname}/randomchat`);
+    // console.log(`connected to wss://${window.location.hostname}/randomchat`);
 
 };
 
 const wsMessageHandler = (evt) => {
 
-    console.log("message from backend", evt.data);
-
     const backendData = JSON.parse(evt.data);
-
-    console.log(backendData, backendData.type);
 
     switch (backendData.type) {
         case "searchStart":
