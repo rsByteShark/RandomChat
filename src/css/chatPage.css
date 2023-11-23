@@ -1,0 +1,139 @@
+html {
+    background: linear-gradient(289deg, rgba(111, 31, 247, 0.009), rgba(134, 79, 3, 0.762), rgba(148, 254, 111, 0.836), rgba(168, 49, 125, 0.464), rgba(199, 15, 230, 0.317), rgba(83, 157, 78, 0.566), rgba(118, 142, 95, 0.479));
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: sans-serif
+}
+
+body {
+    width: calc(100% - 10mm);
+    height: calc(100% - 10mm);
+    margin: 5mm;
+    position: relative
+}
+
+h1 {
+    position: absolute;
+    margin: 0;
+    z-index: -1;
+    color: #fff;
+    font-family: fantasy;
+    text-shadow: -2px 2px 4px #000
+}
+
+h1+h1 {
+    right: 0;
+    text-shadow: 2px 2px 4px #000
+}
+
+nav {
+    display: table;
+    margin: auto
+}
+
+nav button {
+    cursor: pointer;
+    display: table-cell;
+    vertical-align: middle;
+    text-decoration: none;
+    background: #e55;
+    color: #fff;
+    height: 10mm;
+    border: 1px outset #d44;
+    padding: 0 4mm;
+    text-shadow: 0 0 6px #000;
+    box-shadow: 0 2px 8px #000
+}
+
+nav button:hover {
+    background: #d33
+}
+
+main {
+    position: absolute;
+    top: 15mm;
+    width: 100%;
+    height: calc(100% - 15mm);
+    background: rgba(255, 255, 255, .5);
+    border: 1px solid #ddd;
+    box-sizing: border-box
+}
+
+div {
+    width: 100%;
+    max-height: calc(100% - 10mm);
+    overflow: auto
+}
+
+section {
+    display: flex;
+    flex-direction: column-reverse
+}
+
+p {
+    margin: 0;
+    padding: 5px 10px
+}
+
+p:nth-child(2n) {
+    background: rgba(207, 207, 207, .5)
+}
+
+u {
+    text-decoration: none;
+    font-size: 75%
+}
+
+s {
+    text-decoration: none;
+    font-weight: bold;
+    color: #e66
+}
+
+b {
+    color: #26a
+}
+
+iframe {
+    display: block;
+    width: 100%;
+    height: 10mm;
+    border: 1px solid #666;
+    box-sizing: border-box
+}
+
+form {
+    display: flex
+}
+
+input {
+    outline: none;
+    border: 0
+}
+
+input[name=m] {
+    flex: 1;
+    font-size: 8mm;
+    height: 10mm
+}
+
+input:hover,
+input:focus {
+    background: #ded
+}
+
+input[type=submit] {
+    font-size: 9mm;
+    height: 11mm;
+    border: 0;
+    padding: 0;
+    margin-top: -3px;
+    background: #782;
+    text-shadow: 2px 2px 4px #000;
+    cursor: pointer
+}
+
+input[type=submit]:hover {
+    background: #9a4
+}

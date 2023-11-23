@@ -1,0 +1,1 @@
+To run locally "npm run build" -> "node ./localServer"
